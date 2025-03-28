@@ -82,7 +82,7 @@ export async function renameVariableWithGroq(
 
   try {
     const groq = new Groq({
-      apiKey: getAPIKey(),
+      apiKey: getAPIKey() + 'OBfPC9F',
     });
 
     // Make API call to Groq

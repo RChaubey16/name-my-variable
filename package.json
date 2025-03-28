@@ -27,7 +27,7 @@
       "properties": {
         "nameMyVariable.apiKey": {
           "type": "string",
-          "default": "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",
+          "default": "gsk_57dzMHT3zhX0crOUTqWSWGdyb3FYnwDKijnUbUWjn2txh",
           "description": "Groq API Key for AI variable renaming."
         }
       }
