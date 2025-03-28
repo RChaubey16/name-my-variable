@@ -19,7 +19,7 @@
       },
       {
         "command": "extension.renameVariable",
-        "title": "Rename Variable with AI"
+        "title": "Generate variable names"
       }
     ],
     "configuration": {
