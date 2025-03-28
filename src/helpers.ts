@@ -1,3 +1,4 @@
+import * as vscode from "vscode";
 import Groq from "groq-sdk";
 import dotenv from "dotenv";
 
@@ -12,6 +13,15 @@ export interface VariableAssignment {
 export interface VariableNameResponse {
   option1: string;
   option2: string;
+}
+
+/**
+ * Get Groq API key.
+ * @returns Groq API key
+ */
+function getAPIKey(): string {
+  const config = vscode.workspace.getConfiguration('nameMyVariable');
+  return config.get('apiKey') || '';
 }
 
 /**
@@ -72,7 +82,7 @@ export async function renameVariableWithGroq(
 
   try {
     const groq = new Groq({
-      apiKey: "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",
+      apiKey: getAPIKey(),
     });
 
     // Make API call to Groq
