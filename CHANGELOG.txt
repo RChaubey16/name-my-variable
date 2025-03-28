@@ -1,8 +1,0 @@
-Changelog
-
-All notable changes to this project will be documented in this file.
-
-1.0 - Initial Release
-Added:
-- Basic variable name suggestions for JavaScript and TypeScript
-- Inline suggestion display

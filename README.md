@@ -47,7 +47,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Release Notes
 
-### 1.0
+### 1.0.0
 
 - Initial release
 - Basic variable name suggestions for JavaScript and TypeScript
