@@ -41,6 +41,10 @@ A Visual Studio Code extension that helps developers write more readable code by
 
 We welcome contributions! Please feel free to submit a Pull Request.
 
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 ## Release Notes
 
 ### 1.0
