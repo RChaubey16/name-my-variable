@@ -41,7 +41,7 @@ We welcome contributions! Please feel free to submit a Pull Request.
 
 ## Release Notes
 
-### 0.0.1
+### 1.0
 
 - Initial release
 - Basic variable name suggestions for JavaScript and TypeScript
