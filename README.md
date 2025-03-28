@@ -1,5 +1,7 @@
 # Name My Variable
 
+In software engineering, two notoriously difficult things are cache invalidation and naming things. While we can't help with the first one, we've got your back for the second! 😉
+
 A Visual Studio Code extension that helps developers write more readable code by suggesting meaningful variable names. Perfect for JavaScript and TypeScript projects.
 
 ## Features
