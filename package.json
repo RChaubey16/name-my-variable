@@ -4,8 +4,10 @@
   "description": "Extension which generates better, readable variable names.",
   "version": "1.0",
   "icon": "assets/logo.png",
+  "publisher": "RuturajChaubey",
+  "preview": true,
   "galleryBanner,color": {
-    "color": "#21214c",
+    "color": "#008080",
     "theme": "dark"
   },
   "engines": {
