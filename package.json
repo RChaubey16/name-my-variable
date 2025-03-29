@@ -36,6 +36,10 @@
       }
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RChaubey16/name-my-variable.git"
+  },
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
