@@ -27,7 +27,7 @@ A Visual Studio Code extension that helps developers write more readable code by
 4. Type and select "Generate variable name suggestions"
 5. View suggested variable names as inline comments
 
-![Variable naming demo video](./demo.gif)
+![Variable naming demo video](./assets/variable-name-demo.gif)
 
 ## How to Use Function Naming
 
@@ -37,6 +37,8 @@ A Visual Studio Code extension that helps developers write more readable code by
 4. View suggested function names as inline comments
 
 For best results with function naming, select the entire function body including the function declaration and closing brackets.
+
+![Function naming demo video](./assets/function-name-demo.gif)
 
 ## Requirements
 
