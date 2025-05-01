@@ -1,22 +1,11 @@
-/**
- * TODO: FIRST COMMIT BEFORE MOVING FORWARD.
- * Extension development plan.
- *
- * 1. Get current variable assignment line [DONE]
- * 2. Get the current file extension (.tsx, .js, etc) [DONE]
- * 3. Function that takes the variable assignment line and file extension and return AI generated better, readable variable names in JSON format. 2 maximum [DONE]
- * 4. Replace the dummy variable name "num1" with AI generated variable name [DONE]
- * 5. Brainstorm whether we should create a new trigger function that generate variable names using underscores or not. But the current function will be camelCase {TODO}
- * 6. Move helper function to a separate file [DONE].
- *
- */
-
 // Import VS Code API
 import * as vscode from "vscode";
 import {
   extractAssignment,
   extractFileExtension,
   renameVariableWithGroq,
+  extractFunctionCode,
+  renameFunctionWithGroq,
 } from "./helpers";
 
 let decorationType: vscode.TextEditorDecorationType | null = null;
@@ -76,14 +65,102 @@ async function replaceVariableName() {
 }
 
 /**
+ * Function to suggest better function names
+ */
+async function suggestFunctionNames() {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    return;
+  }
+
+  const document = editor.document;
+  const selection = editor.selection;
+  let functionCode: string;
+  
+  // If there's a selection, use it, otherwise extract function from current line
+  if (!selection.isEmpty) {
+    // Use the selected code
+    functionCode = document.getText(selection);
+  } else {
+    // Extract function from current line
+    const extractedFunction = extractFunctionCode(document, selection.active.line);
+    if (!extractedFunction) {
+      vscode.window.showInformationMessage("No function detected. Please select a function or place cursor on a function declaration.");
+      return;
+    }
+    functionCode = extractedFunction;
+  }
+
+  // Get file extension
+  const filePath = editor.document.fileName;
+  const fileExtension = extractFileExtension(filePath) ?? ".js";
+
+  // Show loading message
+  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
+  statusBarItem.text = "$(sync~spin) Generating better function names...";
+  statusBarItem.show();
+
+  try {
+    // Send to Groq AI
+    const resultFromAI = await renameFunctionWithGroq(functionCode, fileExtension);
+    const { option1, option2 } = resultFromAI;
+    
+    // Create an inline decoration
+    if (decorationType) {
+      decorationType.dispose();
+    }
+
+    decorationType = vscode.window.createTextEditorDecorationType({
+      after: {
+        contentText: `    // Better function names: ${option1}, ${option2}`,
+        color: "gray",
+        fontStyle: "italic",
+      },
+    });
+
+    // Determine where to place the decoration
+    let range;
+    if (!selection.isEmpty) {
+      // For selected text, put at the end of the selection
+      range = new vscode.Range(selection.end, selection.end);
+    } else {
+      // For detected function, put at the end of the first line
+      const line = document.lineAt(selection.active.line);
+      range = new vscode.Range(line.range.end, line.range.end);
+    }
+
+    editor.setDecorations(decorationType, [range]);
+
+    // Clean up when cursor moves
+    const removeDecoration = vscode.window.onDidChangeTextEditorSelection(() => {
+      if (decorationType) {
+        decorationType.dispose();
+        decorationType = null;
+      }
+      removeDecoration.dispose();
+    });
+  } catch (error: any) {
+    vscode.window.showErrorMessage(`Error generating function names: ${error.message}`);
+  } finally {
+    statusBarItem.dispose();
+  }
+}
+
+/**
  * Activate the extension
  */
 function activate(context: vscode.ExtensionContext): void {
-  let disposable: vscode.Disposable = vscode.commands.registerCommand(
+  let disposableRenameVar: vscode.Disposable = vscode.commands.registerCommand(
     "extension.renameVariable",
     replaceVariableName
   );
-  context.subscriptions.push(disposable);
+  
+  let disposableRenameFunc: vscode.Disposable = vscode.commands.registerCommand(
+    "extension.suggestFunctionNames",
+    suggestFunctionNames
+  );
+  
+  context.subscriptions.push(disposableRenameVar, disposableRenameFunc);
 }
 
 function deactivate() {}
