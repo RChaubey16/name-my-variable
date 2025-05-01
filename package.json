@@ -2,7 +2,7 @@
   "name": "name-my-variable",
   "displayName": "Name my variable",
   "description": "Extension which generates better, readable variable names.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "icon": "assets/logo.png",
   "publisher": "RuturajChaubey",
   "preview": true,
