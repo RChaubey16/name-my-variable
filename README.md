@@ -58,6 +58,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Release Notes
 
+### 1.0.2
+
+- Replaced Groq with Google Gemini
+
 ### 1.0.1
 
 - Added function name suggestions

@@ -3,9 +3,9 @@ import * as vscode from "vscode";
 import {
   extractAssignment,
   extractFileExtension,
-  renameVariableWithGroq,
+  renameVariableWithGemini,
   extractFunctionCode,
-  renameFunctionWithGroq,
+  renameFunctionWithGemini,
 } from "./helpers";
 
 let decorationType: vscode.TextEditorDecorationType | null = null;
@@ -32,7 +32,7 @@ async function replaceVariableName() {
     return;
   }
 
-  const resultFromAI = await renameVariableWithGroq(line, fileExtension);
+  const resultFromAI = await renameVariableWithGemini(line, fileExtension);
   const { option1, option2 } = resultFromAI;
   const betterVariableNamesComment = `    // Better variable names: ${option1}, ${option2}`;
 
@@ -102,7 +102,7 @@ async function suggestFunctionNames() {
 
   try {
     // Send to Groq AI
-    const resultFromAI = await renameFunctionWithGroq(functionCode, fileExtension);
+    const resultFromAI = await renameFunctionWithGemini(functionCode, fileExtension);
     const { option1, option2 } = resultFromAI;
     
     // Create an inline decoration
