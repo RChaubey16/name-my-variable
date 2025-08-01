@@ -2,7 +2,7 @@
   "name": "name-my-variable",
   "displayName": "Name my variable",
   "description": "Extension which generates better, readable variable names.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "assets/logo.png",
   "publisher": "RuturajChaubey",
   "preview": true,
@@ -30,12 +30,12 @@
       }
     ],
     "configuration": {
-      "title": "Groq AI Extension",
+      "title": "Google AI Extension",
       "properties": {
         "nameMyVariable.apiKey": {
           "type": "string",
-          "default": "gsk_57dzMHT3zhX0crOUTqWSWGdyb3FYnwDKijnUbUWjn2txh",
-          "description": "Groq API Key for AI variable renaming."
+          "default": "AIzaSyAxUd2tS-qj9C7frYuHRsv92t",
+          "description": "Google Gemini API Key for AI variable renaming."
         }
       }
     }
@@ -66,11 +66,12 @@
     "eslint": "^9.23.0",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
+    "vscode": "^1.1.37",
     "webpack": "^5.98.0",
-    "webpack-cli": "^6.0.1",
-    "vscode": "^1.1.37"
+    "webpack-cli": "^6.0.1"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.4.7",
     "groq-sdk": "^0.17.0"
   }
